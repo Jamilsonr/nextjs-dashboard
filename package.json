@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "prebuild": "node vercel-build.js",
     "build": "next build",
     "dev": "next dev --turbopack",
     "start": "next start"
