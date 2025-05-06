@@ -35,7 +35,7 @@ Este arquivo configura o ambiente de build do Vercel para permitir a compilaçã
       "NEXT_TELEMETRY_DISABLED": "1"
     }
   },
-  "installCommand": "pnpm install --no-frozen-lockfile && pnpm approve-builds bcrypt"
+  "installCommand": "pnpm install --no-frozen-lockfile && pnpm rebuild bcrypt"
 }
 ```
 
@@ -50,6 +50,40 @@ enable-pre-post-scripts=true
 node-linker=hoisted
 prefer-frozen-lockfile=false
 public-hoist-pattern[]=*bcrypt*
+shame-install=false
+strict-peer-dependencies=false
+auto-install-peers=true
+ignore-scripts=false
+node-gyp-bin-dir=node_modules/.bin
 ```
 
 Com essas configurações, o deploy no Vercel deve ser concluído com sucesso.
+
+#### 3. Arquivos Adicionais
+
+Foram criados dois arquivos adicionais para garantir a compilação correta do bcrypt:
+
+##### vercel-build.config.js
+Este arquivo configura explicitamente o processo de build no Vercel:
+
+```javascript
+module.exports = {
+  installCommand: 'pnpm install --no-frozen-lockfile && pnpm rebuild bcrypt',
+  env: {
+    NEXT_TELEMETRY_DISABLED: '1'
+  }
+};
+```
+
+##### .vercelignore
+Este arquivo garante que o bcrypt seja compilado corretamente, excluindo arquivos desnecessários do processo de build:
+
+```
+# Ignorar arquivos desnecessários durante o build
+.git
+.github
+.vscode
+
+# Não ignorar node_modules/bcrypt para garantir compilação correta
+!node_modules/bcrypt
+```

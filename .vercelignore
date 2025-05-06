@@ -1,0 +1,7 @@
+# Ignorar arquivos desnecessários durante o build
+.git
+.github
+.vscode
+
+# Não ignorar node_modules/bcrypt para garantir compilação correta
+!node_modules/bcrypt

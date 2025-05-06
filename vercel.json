@@ -4,5 +4,5 @@
       "NEXT_TELEMETRY_DISABLED": "1"
     }
   },
-  "installCommand": "pnpm install --no-frozen-lockfile && pnpm approve-builds bcrypt"
+  "installCommand": "pnpm install --no-frozen-lockfile && pnpm rebuild bcrypt"
 }
